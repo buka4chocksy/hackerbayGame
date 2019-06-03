@@ -2,6 +2,13 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+let createReactClass = require('create-react-class');
+let items = []
+let no_of_moves;
+const max_no_of_moves = 64;
+let mario_jump;
+let max_mashroom;
+
 
 function Starting(props) {
 	return (
@@ -11,6 +18,49 @@ function Starting(props) {
 		</div>
 		)
 }
+
+function GameOutcome(props) {
+	let score_achived  = document.getElementById('score_achived')
+	
+	let no_of_moves_score = document.getElementById('no_of_moves')
+	let steps_remaining = document.getElementById('steps_remaining')
+	let mashrooms_remaining = document.getElementById('mashrooms_remaining')
+	steps_remaining.innerHTML = max_no_of_moves -  no_of_moves
+	no_of_moves_score.innerHTML = no_of_moves
+	mashrooms_remaining.innerHTML = document.getElementsByClassName('active').length
+	score_achived.innerHTML = max_mashroom - document.getElementsByClassName('active').length
+}
+
+let Score = createReactClass({
+	getInitialState: function() {
+		return {score: 0}
+
+	},
+	render: function() {
+		return (
+		<div id="score">
+			<div>
+				<p>Score Achived</p>
+				<p id="score_achived">0</p>
+			</div>
+			<div>
+				<p>Steps Used</p>
+				<p id="no_of_moves">0</p>
+			</div>
+			<div >
+				<p>Steps Remaining</p>
+				<p id="steps_remaining">0</p>
+			</div>
+			<div >
+				<p>Mashroom Remaining</p>
+				<p id="mashrooms_remaining">0</p>
+			</div>
+		</div>
+		)
+	}
+})
+
+
 
 
 
@@ -38,6 +88,7 @@ render(){
   return (
     <div className="App">
       <Starting />
+      <Score />
     </div>
   )
 }
